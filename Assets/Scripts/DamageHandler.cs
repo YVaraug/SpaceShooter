@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using System;
 
 public class DamageHandler : MonoBehaviour {
 
 	public int health = 1;
-
-
-	SpriteRenderer spriteRend;
+	public Slider playerHP;
 
 	void Start() {
 
@@ -14,6 +14,7 @@ public class DamageHandler : MonoBehaviour {
 
 	void OnTriggerEnter2D() {
 		health--;
+		playerHP.value = health;
 	}
 
 	void Update() {
@@ -26,6 +27,11 @@ public class DamageHandler : MonoBehaviour {
 
 	void Die() {
 		Destroy(gameObject);
+	}
+
+	public void Health ()
+	{
+
 	}
 
 }

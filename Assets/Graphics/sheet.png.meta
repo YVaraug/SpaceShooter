@@ -1,10 +1,13 @@
 fileFormatVersion: 2
 guid: d13278a0727d32d40b20969211348cb9
+timeCreated: 1481395237
+licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: PlayerShip
     21300002: Enemy01
     21300004: Bullet01
+    21300006: Bullet02
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -92,6 +95,19 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: -1
+    - serializedVersion: 2
+      name: Bullet02
+      rect:
+        serializedVersion: 2
+        x: 856
+        y: 385
+        width: 9
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
     outline: []
   spritePackingTag: 
   userData: 
