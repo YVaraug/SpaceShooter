@@ -14,7 +14,9 @@ public class DamageHandler : MonoBehaviour {
 
 	void OnTriggerEnter2D() {
 		health--;
-		playerHP.value = health;
+		if (playerHP) {
+			playerHP.value = health;
+		}
 	}
 
 	void Update() {
