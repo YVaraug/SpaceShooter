@@ -32,6 +32,7 @@ sysinfo.txt
 
 # My ignores
 # executables (only in windows for the moment)
+/*_Data/
 *.exe
 # temp files (only in windows for the moment) just testing
 /**/*\~* 
