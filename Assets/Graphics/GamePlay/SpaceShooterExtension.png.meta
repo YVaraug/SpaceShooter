@@ -1,17 +1,14 @@
 fileFormatVersion: 2
-guid: d13278a0727d32d40b20969211348cb9
-timeCreated: 1481395237
+guid: 85f20e62594b5b445b6ca371cc0a6ad0
+timeCreated: 1484316231
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: PlayerShip
-    21300002: Enemy01
-    21300004: Bullet01
-    21300006: Bullet02
+    21300000: Miner_Droid_expansion
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -33,8 +30,8 @@ TextureImporter:
   textureFormat: -3
   maxTextureSize: 2048
   textureSettings:
-    filterMode: 2
-    aniso: 1
+    filterMode: 0
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -57,52 +54,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayerShip
+      name: Miner_Droid_expansion
       rect:
         serializedVersion: 2
-        x: 224
-        y: 117
-        width: 99
-        height: 75
-      alignment: 9
-      pivot: {x: 0.5, y: 0.35}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: Enemy01
-      rect:
-        serializedVersion: 2
-        x: 518
-        y: 615
-        width: 82
-        height: 84
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: Bullet01
-      rect:
-        serializedVersion: 2
-        x: 856
-        y: 212
-        width: 9
-        height: 37
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: Bullet02
-      rect:
-        serializedVersion: 2
-        x: 856
-        y: 385
-        width: 9
-        height: 37
+        x: 1370
+        y: 1342
+        width: 184
+        height: 292
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

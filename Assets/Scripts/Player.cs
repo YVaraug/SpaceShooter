@@ -1,20 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Net.NetworkInformation;
 
 public class Player : MonoBehaviour {
 
-	//Movement
-	public float maxSpeed = 5f;
-	public float rotSpeed = 180f;
-	//Boundaries
-	float shipBoundaryRadius = 0.5f;
-	//Shooting
-	public Vector3 bulletOffset = new Vector3(0, 0.5f, 0);
-	public GameObject bulletPrefab;
-	int bulletLayer;
-	public float fireDelay = 0.25f;
-	float cooldownTimer = 0;
-
+	//Behaviour content
 
 	void Start () 
 	{
@@ -27,28 +17,105 @@ public class Player : MonoBehaviour {
 		//Face the mouse
 		FacetToMouse (rotSpeed);
 
-		// Move in forward relative to player
-		Vector3 velocity = new Vector3(0, Input.GetAxis("Vertical") * maxSpeed * Time.deltaTime, 0);
-		transform.position += transform.rotation * velocity;
+		// Move in forward relative to player Input.GetAxis("Vertical")
+		MoveForward(maxSpeed, Input.GetAxis("Vertical"));
 
 		// Avoid hitting the camara Ortographic Boundaries
 		RestrictToBoundaries (shipBoundaryRadius);
 
 		//Shooting
 		cooldownTimer -= Time.deltaTime;
-		if(Input.GetButton("Fire1") && cooldownTimer <= 0 ) 
+		if(Input.GetButton("Fire1") && cooldownTimer <= 0 && Time.deltaTime > 0) 
 		{
+			//Reset timer
 			cooldownTimer = fireDelay;
 			// SHOOT!
-			Vector3 offset = transform.rotation * bulletOffset;
-			GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, transform.position + offset, transform.rotation);
-			bulletGO.layer = bulletLayer;
+			Shoot(bulletPrefab, bulletOffset);
+
+		}
+
+		ShieldRegenerator ();
+
+
+	}
+
+	void OnTriggerEnter2D(Collider2D other) {
+		if (other.tag == "Asteroid"){
+			MoveForward (-2.5f*maxSpeed);
+		}
+		DamageHandler (1);
+		if (health <= 0) Die ();
+	}
+
+	//Class Definition
+
+	//Movement
+	public float maxSpeed = 5f;
+	public float rotSpeed = 180f;
+	//Boundaries
+	float shipBoundaryRadius = 0.5f;
+	//Shooting
+	public Vector3 bulletOffset = new Vector3(0, 0.5f, 0);
+	public GameObject bulletPrefab;
+	int bulletLayer;
+	public float fireDelay = 0.25f;
+	float cooldownTimer = 0;
+	//Stats
+
+	public float health = 10f;
+	public float maxHealth = 10f;
+	public float shield = 10f;
+	public float maxShield = 10f;
+	public float regenRate = 0.2f;
+
+
+
+
+	void Die() {
+		Destroy(gameObject);
+	}
+
+	void ShieldRegenerator(){
+		if (this.shield < maxShield) {
+			this.shield += this.regenRate * Time.deltaTime;
+		}
+	}
+
+	void DamageHandler(float damage){
+
+		if (this.shield > damage) {
+			this.shield -= damage;
+		}
+		else{
+			damage -= this.shield;
+			this.shield = 0;
+			this.health -= damage;
 		}
 
 	}
 
+	void MoveForward(float maxSpeed, float input = 1f)
+	{
+		//Moves forward according to the vertical axis 
+		//or just forward if not given an input
+
+		Vector3 velocity = new Vector3(0, input * maxSpeed * Time.deltaTime, 0);
+		transform.position += transform.rotation * velocity;
+
+	}
+
+	void Shoot(GameObject prefab, Vector3 offset)
+
+	{
+		cooldownTimer = fireDelay;
+		// SHOOT!
+		Vector3 newOffset = transform.rotation * offset;
+		GameObject bulletGO = (GameObject)Instantiate(prefab, transform.position + newOffset, transform.rotation);
+		bulletGO.layer = bulletLayer;
 
 
+	}
+		
 
 	void FacetToMouse(float rotSpeed)
 	{
@@ -120,20 +187,7 @@ public class Player : MonoBehaviour {
 
 	}
 
-	void ZoomInOut(int maxOrthoSize = 20, int minOrthoSize = 5)
-	{
-		// Gets the input of the Scroll Wheel
-		float scrollButton = Input.mouseScrollDelta.y;
-		// Gets the actual Ortho Size
-		float orthoSize = Camera.main.orthographicSize;
-		// Zooms in or out till a Max or Min
-		if (scrollButton > 0 && orthoSize < maxOrthoSize) {
-			Camera.main.orthographicSize++;
-		} 
-		else if (scrollButton < 0 && orthoSize > minOrthoSize) {
-			Camera.main.orthographicSize--;
-		}
-	}
+
 		
 
 }
